@@ -2,7 +2,7 @@
 
 An open dataset of **2,038 Unicode characters, sequences and Japanese kaomoji**, each with a
 human-readable name, its code points, and the collections it belongs to. JSON and CSV, no
-dependencies, no API key, public domain-ish licence.
+dependencies, no API key. Data under CC BY 4.0, build script under MIT.
 
 It exists because every "copy and paste symbols" site keeps its list locked inside its own HTML.
 This one is a file you can `curl`.
@@ -11,7 +11,7 @@ This one is a file you can `curl`.
 2,038  unique characters and sequences
 2,727  entries across 24 collections
   927  single code points, all carrying their official Unicode name
-   47  entries (1.7%) with no usable name — see Limitations
+   47  entries (1.7%) with no usable name (see Limitations)
 ```
 
 ## Quick start
@@ -26,7 +26,7 @@ URL = "https://raw.githubusercontent.com/Flavioce1/aesthetic-unicode-dataset/mai
 entries = json.load(urllib.request.urlopen(URL))
 
 hearts = [e for e in entries if e["category"] == "hearts"]
-print(hearts[0]["character"], "—", hearts[0]["name"])   # ♥ — Black Heart Suit
+print(hearts[0]["character"], hearts[0]["name"])   # ♥ Black Heart Suit
 ```
 
 ```js
@@ -77,31 +77,31 @@ const stars = entries.filter(e => e.category === "stars");
 
 ## Collections
 
-**Symbols** — stars, hearts, arrows, music, weather, math, brackets, checks, currency, zodiac, general
-**Kaomoji** — all, happy, sad, cat, angry, love, bear
-**Text** — dividers, bullets, bio-combos, decorators, small-text, glitch
+**Symbols:** stars, hearts, arrows, music, weather, math, brackets, checks, currency, zodiac, general
+**Kaomoji:** all, happy, sad, cat, angry, love, bear
+**Text:** dividers, bullets, bio-combos, decorators, small-text, glitch
 
 ## Provenance
 
 Names come from three places, in this order:
 
-1. **Human curation** — most entries, especially kaomoji, where a code point name would be
+1. **Human curation**: most entries, especially kaomoji, where a code point name would be
    meaningless. `(╯°□°）╯︵ ┻━┻` is "Table Flip", not a list of 12 code points.
 2. **The Unicode Character Database**, via Python's `unicodedata`, for single code points that had
    no curated name. This filled 73 entries.
-3. **The character itself**, when neither applies — flagged with `named: false`.
+3. **The character itself**, when neither applies (flagged with `named: false`).
 
 The curated names and the collection groupings come from
 [copy-aesthetic.com](https://copy-aesthetic.com), a free copy-paste tool for these characters.
 `build.py` extracts them from that site's `ItemList` structured data, so the dataset and the site
 cannot drift apart.
 
-## Limitations — read these before relying on it
+## Limitations: read these before relying on it
 
 - **47 entries (1.7%) have no real name.** All of them are multi-character kaomoji whose source
   entry carried the character itself as its label. They are marked `named: false` rather than
   given an invented label.
-- **This is not a Unicode mirror.** It is a curated *aesthetic* subset — the characters people
+- **This is not a Unicode mirror.** It is a curated *aesthetic* subset: the characters people
   actually paste into bios and usernames. For the full standard, use the
   [UCD](https://www.unicode.org/Public/UCD/latest/).
 - **No rendering guarantees.** Whether `⛧` shows up on your user's Android build is not encoded
@@ -113,14 +113,14 @@ cannot drift apart.
 
 ## Licence
 
-- **Data** — [CC BY 4.0](LICENSE). Use it commercially, modify it, just credit the source.
-- **`build.py`** — MIT, do what you like.
+- **Data:** [CC BY 4.0](LICENSE). Use it commercially, modify it, just credit the source.
+- **`build.py`:** MIT, do what you like.
 - Character names taken from the Unicode Character Database remain subject to the
   [Unicode Terms of Use](https://www.unicode.org/copyright.html). Unicode® is a registered
   trademark of Unicode, Inc.
 
 ## Contributing
 
-Missing names, wrong categories and better kaomoji labels are all welcome — especially for the 47
+Missing names, wrong categories and better kaomoji labels are all welcome, especially for the 47
 unnamed entries. Open an issue or a PR against `data/`, and mention which collection you are
 touching.
